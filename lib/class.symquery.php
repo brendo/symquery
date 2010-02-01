@@ -13,13 +13,6 @@
 		const SYSTEM_ID = 'system:id';
 		const SYSTEM_DATE = 'system:date';
 		
-		// Result modes:
-		const RESULT_ARRAY = 'array';
-		const RESULT_COUNT = 'count';
-		const RESULT_DOM = 'dom';
-		const RESULT_ENTRY = 'entry';
-		const RESULT_XML = 'xml';
-		
 		protected static $field_cache = array();
 		protected static $section_cache = array();
 		protected static $ready = false;
@@ -28,28 +21,6 @@
 		protected static $fm = null;
 		protected static $sm = null;
 		protected static $symphony = null;
-		
-		protected $section = null;
-		
-		public function __construct($section) {
-			if (class_exists('Frontend')) {
-				$symphony = Frontend::instance();
-			}
-			
-			else {
-				$symphony = Administration::instance();
-			}
-			
-			if (!self::$ready) {
-				self::$db = Symphony::Database();
-				self::$em = new EntryManager($symphony);
-				self::$fm = new FieldManager($symphony);
-				self::$sm = new SectionManager($symphony);
-				self::$symphony = $symphony;
-			}
-			
-			$this->section = self::buildSection($section);
-		}
 		
 		/**
 		* Prepare an object that stores the field and data to filter results with.
@@ -399,6 +370,32 @@
 			
 			return $resource;
 		}
+		
+		protected $section = null;
+		
+		public function __construct($section) {
+			if (class_exists('Frontend')) {
+				$symphony = Frontend::instance();
+			}
+			
+			else {
+				$symphony = Administration::instance();
+			}
+			
+			if (!self::$ready) {
+				self::$db = Symphony::Database();
+				self::$em = new EntryManager($symphony);
+				self::$fm = new FieldManager($symphony);
+				self::$sm = new SectionManager($symphony);
+				self::$symphony = $symphony;
+			}
+			
+			$this->section = self::buildSection($section);
+		}
+	}
+	
+	class SymQueryExeption extends Exception {
+		
 	}
 
 ?>
