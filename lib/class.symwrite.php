@@ -14,7 +14,7 @@
 			return $this;
 		}
 		
-		public function save() {
+		public function write() {
 			$author = SymQuery::$symphony->Author;
 			$section = $this->section->get('object');
 			$entry = SymQuery::$em->create();

@@ -18,3 +18,36 @@ Installation
 
 2. Enable it by selecting the "SymQuery" item, choose Enable from the
    with-selected menu, then click Apply.
+
+
+Examples
+-------------------------------------------------------------------------------
+
+This is mostly still todo, however here's a quick example on how to read a
+generic comments section:
+	
+	$comments = SymRead('comments')
+		->get('name')
+		->get('email')
+		->get('website')
+		->get('created')
+		->get('content')
+		->where('approved', 'yes')
+		->where('site-owner', 'yes', SymQuery::FILTER_OR)
+		->readEntryIterator();
+	
+	foreach ($comments as $entry) {
+		// $entry is an instance of the Entry class.
+	}
+	
+And heres how you might insert a comment:
+	
+	$comment = SymWrite('comments')
+		->set('name', 'Test')
+		->set('email', 'test@test.com')
+		->set('website', 'http://test.com')
+		->set('created', 'now')
+		->set('content', 'This is a test comment')
+		->write();
+	
+	// $comment is an instance of the Entry class.
