@@ -3,7 +3,6 @@
 	require_once EXTENSIONS . '/symquery/lib/class.symquery.php';
 	require_once EXTENSIONS . '/symquery/lib/class.symqueryresource.php';
 	require_once EXTENSIONS . '/symquery/lib/class.symread.php';
-	require_once EXTENSIONS . '/symquery/lib/class.symreadresult.php';
 	require_once EXTENSIONS . '/symquery/lib/class.symwrite.php';
 	
 	class Extension_SymQuery extends Extension {
