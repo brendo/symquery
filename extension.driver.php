@@ -1,5 +1,9 @@
 <?php
 	
+	require_once TOOLKIT . '/class.entrymanager.php';
+	require_once TOOLKIT . '/class.fieldmanager.php';
+	require_once TOOLKIT . '/class.sectionmanager.php';
+	
 	require_once EXTENSIONS . '/symquery/lib/class.symquery.php';
 	require_once EXTENSIONS . '/symquery/lib/class.symqueryresource.php';
 	require_once EXTENSIONS . '/symquery/lib/class.symread.php';
