@@ -1,0 +1,19 @@
+SymQuery
+-------------------------------------------------------------------------------
+
+SymQuery lets you build read and write queries for Symphony sections.
+
+Version: 0.1.0
+Author: Rowan Lewis <me@rowanlewis.com>
+Build Date: 1 February 2010
+Requirements: Symphony 2.0.6
+
+
+Installation
+-------------------------------------------------------------------------------
+
+1. Upload the 'symquery' folder in this archive to your Symphony
+   'extensions' folder.
+
+2. Enable it by selecting the "SymQuery" item, choose Enable from the
+   with-selected menu, then click Apply.
