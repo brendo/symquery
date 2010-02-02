@@ -46,14 +46,14 @@
 				if ($field == SymQuery::SYSTEM_ID) {
 					if (!empty($filter)) {
 						$wheres .= sprintf(
-							'%s e.id IN(%s)', $prefix, implode(', ', $filter)
+							'%s e.id IN(%s) ', $prefix, implode(', ', $filter)
 						);
 					}
 					
 					// Selects nothing, but required for a valid query:
 					else {
 						$wheres .= sprintf(
-							'%s e.id = 0', $prefix
+							'%s e.id = 0 ', $prefix
 						);
 					}
 				}
@@ -63,7 +63,7 @@
 					$field->buildDSRetrivalSQL($filter, $current_joins, $current_wheres, false);
 					
 					$current_wheres = sprintf(
-						"%s (1 %s)", $prefix, trim($current_wheres)
+						"%s (1 %s) ", $prefix, trim($current_wheres)
 					);
 					
 					$joins .= $current_joins;
@@ -458,7 +458,7 @@
 				}
 				
 				else if ($child instanceof DOMText) {
-					$to->setValue($child->wholeText);
+					$to->setValue(General::sanitize($child->wholeText));
 				}
 			}
 		}
