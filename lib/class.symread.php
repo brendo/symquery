@@ -195,7 +195,7 @@
 		*/
 		public function count($result_distinct = true) {
 			if (!$this->section instanceof SymQueryResource) {
-				throw new Exception('No section specified.');
+				throw new SymQueryException('No section specified.');
 			}
 			
 			$section = $this->section->get('object');
@@ -261,7 +261,7 @@
 		*/
 		public function read(SymReadResult $result_object, $result_distinct = true) {
 			if (!$this->section instanceof SymQueryResource) {
-				throw new Exception('No section specified.');
+				throw new SymQueryException('No section specified.');
 			}
 			
 			$section = $this->section->get('object');

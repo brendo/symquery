@@ -42,13 +42,14 @@
 			}
 			
 			if (__ENTRY_FIELD_ERROR__ == $entry->checkPostData($entry_data, $errors)) {
-				throw new Exception(sprintf(
-					'Unable to validate entry: %s', @array_shift($errors)
-				));
+				$error = new SymWriteException('Unable to validate entry.');
+				$error->setValidationErrors($errors);
+				
+				throw $error;
 			}
 			
 			if (__ENTRY_OK__ != $entry->setDataFromPost($entry_data, $error)) {
-				throw new Exception(sprintf(
+				throw new SymQueryException(sprintf(
 					'Unable to save entry: %s', $error
 				));
 			}
@@ -56,6 +57,28 @@
 			$entry->commit();
 			
 			return $entry;
+		}
+	}
+	
+	class SymWriteException extends SymQueryExeption {
+		protected $validation_errors = array();
+		
+		/**
+		* Get an array containing any validation errors
+		* 
+		* @return	Array
+		*/
+		public function getValidationErrors() {
+			return $this->validation_errors;
+		}
+		
+		/**
+		* Set the array of validation errors
+		* 
+		* @param	$errors		Array
+		*/
+		public function setValidationErrors(Array $errors) {
+			$this->validation_errors = $errors;
 		}
 	}
 	
