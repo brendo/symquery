@@ -447,7 +447,7 @@
 		
 		protected function toXMLElementLoop($from, $to) {
 			if ($from->attributes->length) foreach ($from->attributes as $attribute) {
-				$to->setAttribute($attribute->name, $attribute->value);
+				$to->setAttribute($attribute->name, General::sanitize($attribute->value));
 			}
 			
 			if ($from->childNodes->length) foreach ($from->childNodes as $child) {
