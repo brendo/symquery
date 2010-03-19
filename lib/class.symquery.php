@@ -394,7 +394,7 @@
 		}
 	}
 	
-	class SymQueryExeption extends Exception {
+	class SymQueryExecption extends Exception {
 		
 	}
 
