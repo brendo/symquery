@@ -22,7 +22,7 @@
 
 			// Build default entry data:
 			$entry->set('section_id', $section->get('id'));
-			$entry->set('author_id', (!is_object($author)) ? 0 : $author->get('id'));
+			if (is_object($author)) $entry->set('author_id', $author->get('id'));
 			$entry->set('creation_date', DateTimeObj::get('Y-m-d H:i:s'));
 			$entry->set('creation_date_gmt', DateTimeObj::getGMT('Y-m-d H:i:s'));
 
@@ -60,7 +60,7 @@
 		}
 	}
 
-	class SymWriteException extends SymQueryExecption {
+	class SymWriteException extends SymQueryException {
 		protected $validation_errors = array();
 
 		/**
