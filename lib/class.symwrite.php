@@ -41,9 +41,17 @@
 				}
 			}
 
-			if (__ENTRY_FIELD_ERROR__ == $entry->checkPostData($entry_data, $errors)) {
+			if (__ENTRY_FIELD_ERROR__ == $entry->checkPostData($entry_data, $errors)) {			
+				$validation_errors = array();
+				foreach($errors as $field_id => $message) {
+					$validation_errors[$field_id] = array(
+						'field' => self::$field_cache[$field_id],
+						'error' => $message
+					);
+				}
+				
 				$error = new SymWriteException('Unable to validate entry.');
-				$error->setValidationErrors($errors);
+				$error->setValidationErrors($validation_errors);
 
 				throw $error;
 			}
