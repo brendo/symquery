@@ -343,7 +343,7 @@
 			else {
 				$id = $section;
 
-				if(!is_int($id)) $id = (integer)self::$sm->fetchIDFromHandle($section);
+				if(!is_int($id)) $id = self::$sm->fetchIDFromHandle($section);
 
 				if ($id > 0) {
 					if (isset(self::$section_cache[$id])) {
