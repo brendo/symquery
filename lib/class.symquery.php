@@ -70,20 +70,17 @@
 			}
 
 			else {
+				$result = false;
 				$section_id = $section->get('id');
-				$result = self::$fm->fetch($field, $section_id);
 
-				if ($result === false) {
-					$id = (integer)self::$fm->fetchFieldIDFromElementName($field, $section_id);
+				$id = is_int($field) ? $field : self::$fm->fetchFieldIDFromElementName($field, $section_id);
 
-					if ($id > 0) {
-						if (isset(self::$field_cache[$id])) {
-							$result = self::$field_cache[$id];
-						}
-
-						else {
-							$result = self::$fm->fetch($id, $section_id);
-						}
+				if ($id > 0) {
+					if (isset(self::$field_cache[$id])) {
+						$result = self::$field_cache[$id];
+					}
+					else {
+						$result = self::$fm->fetch($id, $section_id);
 					}
 				}
 
@@ -132,29 +129,27 @@
 				$resource->set('object', $field);
 			}
 
-			else if ($field == self::SYSTEM_DATE) {
-				$resource->set('object', $field);
-			}
-
 			else {
+				$result = false;
 				$section_id = $section->get('id');
-				$result = self::$fm->fetch($field, $section_id);
 
-				if ($result === false) {
+				if(is_int($field)) {
+					$id = $field;
+				}
+				else {
 					$parts = preg_split('/:\s*/', $field, 2);
 					$resource->set('mode', @$parts[1]);
 					$name = $parts[0];
 
-					$id = (integer)self::$fm->fetchFieldIDFromElementName($name, $section_id);
+					$id = self::$fm->fetchFieldIDFromElementName($name, $section_id);
+				}
 
-					if ($id > 0) {
-						if (isset(self::$field_cache[$id])) {
-							$result = self::$field_cache[$id];
-						}
-
-						else {
-							$result = self::$fm->fetch($id, $section_id);
-						}
+				if ($id > 0) {
+					if (isset(self::$field_cache[$id])) {
+						$result = self::$field_cache[$id];
+					}
+					else {
+						$result = self::$fm->fetch($id, $section_id);
 					}
 				}
 
@@ -215,20 +210,17 @@
 			}
 
 			else {
+				$result = false;
 				$section_id = $section->get('id');
-				$result = self::$fm->fetch($field, $section_id);
 
-				if ($result === false) {
-					$id = (integer)self::$fm->fetchFieldIDFromElementName($field, $section_id);
+				$id = is_int($field) ? $field : self::$fm->fetchFieldIDFromElementName($field, $section_id);
 
-					if ($id > 0) {
-						if (isset(self::$field_cache[$id])) {
-							$result = self::$field_cache[$id];
-						}
-
-						else {
-							$result = self::$fm->fetch($id, $section_id);
-						}
+				if ($id > 0) {
+					if (isset(self::$field_cache[$id])) {
+						$result = self::$field_cache[$id];
+					}
+					else {
+						$result = self::$fm->fetch($id, $section_id);
 					}
 				}
 
@@ -288,20 +280,17 @@
 			}
 
 			else {
+				$result = false;
 				$section_id = $section->get('id');
-				$result = self::$fm->fetch($field, $section_id);
 
-				if ($result === false) {
-					$id = (integer)self::$fm->fetchFieldIDFromElementName($field, $section_id);
+				$id = is_int($field) ? $field : self::$fm->fetchFieldIDFromElementName($field, $section_id);
 
-					if ($id > 0) {
-						if (isset(self::$field_cache[$id])) {
-							$result = self::$field_cache[$id];
-						}
-
-						else {
-							$result = self::$fm->fetch($id, $section_id);
-						}
+				if ($id > 0) {
+					if (isset(self::$field_cache[$id])) {
+						$result = self::$field_cache[$id];
+					}
+					else {
+						$result = self::$fm->fetch($id, $section_id);
 					}
 				}
 
@@ -341,9 +330,7 @@
 			}
 
 			else {
-				$id = $section;
-
-				if(!is_int($id)) $id = self::$sm->fetchIDFromHandle($section);
+				$id = (is_int($section)) ? $section : self::$sm->fetchIDFromHandle($section);
 
 				if ($id > 0) {
 					if (isset(self::$section_cache[$id])) {
@@ -374,7 +361,6 @@
 			if (class_exists('Frontend')) {
 				$symphony = Frontend::instance();
 			}
-
 			else {
 				$symphony = Administration::instance();
 			}
